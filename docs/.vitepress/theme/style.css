@@ -1,0 +1,565 @@
+/* ===========================
+   全局变量 & 基础
+   =========================== */
+:root {
+  --vp-c-brand: #7c3aed;
+  --vp-c-brand-light: #8b5cf6;
+  --vp-c-brand-lighter: #a78bfa;
+  --vp-c-brand-dark: #6d28d9;
+  --vp-c-brand-darker: #5b21b6;
+
+  /* 柔和暖白底色 */
+  --vp-c-bg: #faf8fc;
+  --vp-c-bg-soft: #f3f0f8;
+  --vp-c-bg-elv: rgba(255, 255, 255, 0.82);
+
+  --vp-home-hero-name-color: transparent;
+  --vp-home-hero-name-background: linear-gradient(120deg, #7c3aed 0%, #c084fc 40%, #f59e0b 100%);
+
+  /* Hero 图片背景光晕 */
+  --vp-home-hero-image-background-image:
+    radial-gradient(circle 35% at 55% 45%, rgba(167, 139, 250, 0.18) 0%, transparent 55%),
+    radial-gradient(circle 45% at 45% 55%, rgba(192, 132, 252, 0.12) 0%, transparent 60%),
+    radial-gradient(circle 55% at 50% 50%, rgba(245, 158, 11, 0.06) 0%, transparent 70%);
+  --vp-home-hero-image-filter: blur(44px);
+}
+
+/* ===========================
+   暗色模式全局变量覆盖
+   =========================== */
+html.dark {
+  --vp-c-bg: #0d0d1a;
+  --vp-c-bg-soft: #1a1a2e;
+  --vp-c-bg-elv: rgba(26, 26, 46, 0.85);
+  --vp-c-brand: #a78bfa;
+  --vp-c-brand-light: #c4b5fd;
+  --vp-c-brand-lighter: #ddd6fe;
+  --vp-c-brand-dark: #8b5cf6;
+  --vp-c-brand-darker: #7c3aed;
+}
+
+/* ===========================
+   Hero 图片
+   =========================== */
+/* 图片容器 - 圆形裁切 */
+.VPHero .image-container {
+  position: relative;
+  width: 220px !important;
+  height: 220px !important;
+  max-width: 220px !important;
+  max-height: 220px !important;
+  min-width: 220px !important;
+  min-height: 220px !important;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* 图片本体 */
+.VPHero .image-container .image-src {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100% !important;
+  min-width: 100% !important;
+  min-height: 100% !important;
+  object-fit: cover !important;
+  object-position: center center !important;
+  transform-origin: center center;
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.VPHero .image-container .image-src {
+  transform: scale(1);
+}
+
+.VPHero .image-container:hover .image-src {
+  transform: scale(1.2);
+}
+
+/* 扩散光晕 - 极光紫 + 暖金 */
+.VPHero .image-container {
+  box-shadow:
+    /* 内层高光 */
+    0 0 0 2px rgba(192, 132, 252, 0.45),
+    0 0 0 4px rgba(192, 132, 252, 0.25),
+    /* 中层紫晕扩散 */
+    0 0 20px rgba(139, 92, 246, 0.45),
+    0 0 40px rgba(124, 58, 237, 0.35),
+    0 0 60px rgba(167, 139, 250, 0.25),
+    /* 外层暖金过渡 */
+    0 0 80px rgba(245, 158, 11, 0.18),
+    0 0 100px rgba(192, 132, 252, 0.12),
+    0 0 120px rgba(139, 92, 246, 0.08),
+    /* 最外淡紫弥散 */
+    0 0 160px rgba(167, 139, 250, 0.06);
+}
+
+/* 暗色模式光晕更亮 */
+html.dark .VPHero .image-container {
+  box-shadow:
+    0 0 0 2px rgba(192, 132, 252, 0.6),
+    0 0 0 4px rgba(192, 132, 252, 0.35),
+    0 0 20px rgba(139, 92, 246, 0.55),
+    0 0 40px rgba(124, 58, 237, 0.45),
+    0 0 60px rgba(167, 139, 250, 0.35),
+    0 0 80px rgba(245, 158, 11, 0.22),
+    0 0 100px rgba(192, 132, 252, 0.16),
+    0 0 120px rgba(139, 92, 246, 0.1),
+    0 0 160px rgba(167, 139, 250, 0.08);
+}
+
+
+
+/* ===========================
+   全局页面背景
+   =========================== */
+/* 浅色底 - 暖白渐变 */
+body {
+  background:
+    linear-gradient(135deg, #faf8fc 0%, #fdf4f0 30%, #f5f0ff 60%, #faf8fc 100%) fixed,
+    radial-gradient(ellipse 600px 500px at 85% 10%, rgba(167, 139, 250, 0.06) 0%, transparent 100%) fixed,
+    radial-gradient(ellipse 500px 400px at 15% 90%, rgba(245, 158, 11, 0.04) 0%, transparent 100%) fixed,
+    radial-gradient(circle 400px at 30% 50%, rgba(192, 132, 252, 0.04) 0%, transparent 100%) fixed;
+}
+
+/* 暗色底 - 深靛黑渐变 */
+html.dark body {
+  background:
+    linear-gradient(135deg, #0d0d1a 0%, #120f1e 30%, #0f0d1a 60%, #0d0d1a 100%) fixed,
+    radial-gradient(ellipse 600px 500px at 85% 10%, rgba(139, 92, 246, 0.08) 0%, transparent 100%) fixed,
+    radial-gradient(ellipse 500px 400px at 15% 90%, rgba(245, 158, 11, 0.05) 0%, transparent 100%) fixed,
+    radial-gradient(circle 400px at 30% 50%, rgba(167, 139, 250, 0.05) 0%, transparent 100%) fixed;
+}
+
+/* 网格纹理叠加 - 浅色 */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    linear-gradient(rgba(167, 139, 250, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(167, 139, 250, 0.03) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, black 20%, transparent 70%);
+}
+
+/* 网格纹理 - 暗色 */
+html.dark body::before {
+  background-image:
+    linear-gradient(rgba(167, 139, 250, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(167, 139, 250, 0.04) 1px, transparent 1px);
+}
+
+/* 内容区提到网格之上 */
+#app {
+  position: relative;
+  z-index: 1;
+}
+
+/* ===========================
+   Hero 区域
+   =========================== */
+.VPHero {
+  padding-bottom: 64px;
+  position: relative;
+  z-index: 1;
+}
+
+.VPHero .name {
+  font-size: 64px !important;
+  font-weight: 800 !important;
+  letter-spacing: 2px;
+  animation: heroNameFadeIn 1s ease-out;
+}
+
+.VPHero .text {
+  font-size: 24px !important;
+  line-height: 1.6;
+  animation: heroTaglineFadeIn 1s ease-out 0.3s both;
+}
+
+.VPHero .tagline {
+  font-size: 18px !important;
+  color: var(--vp-c-text-2);
+  animation: heroTaglineFadeIn 1s ease-out 0.5s both;
+}
+
+/* 按钮区域 */
+.VPHero .actions {
+  animation: heroActionsFadeIn 1s ease-out 0.7s both;
+}
+
+/* 主按钮样式增强 */
+.VPHero .action .VPButton.brand {
+  border-radius: 12px;
+  padding: 0 28px;
+  line-height: 48px;
+  font-size: 16px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 14px rgba(139, 92, 246, 0.4);
+}
+
+.VPHero .action .VPButton.brand:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(139, 92, 246, 0.55);
+}
+
+/* Hero 背景装饰 */
+.VPHero::before {
+  content: '';
+  position: absolute;
+  top: -200px;
+  right: -200px;
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(circle, rgba(167, 139, 250, 0.1) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: -1;
+  animation: heroBgFloat 8s ease-in-out infinite;
+}
+
+.VPHero::after {
+  content: '';
+  position: absolute;
+  bottom: -50px;
+  left: 5%;
+  width: 500px;
+  height: 250px;
+  background: radial-gradient(ellipse, rgba(192, 132, 252, 0.08) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: -1;
+  animation: heroBgFloat 8s ease-in-out infinite reverse;
+}
+
+/* 第三装饰圆 */
+.VPHero .container::after {
+  content: '';
+  position: absolute;
+  top: 40%;
+  left: -150px;
+  width: 350px;
+  height: 350px;
+  background: radial-gradient(circle, rgba(245, 158, 11, 0.06) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* ===========================
+   Features 卡片区
+   =========================== */
+.VPFeatures {
+  padding-top: 32px;
+  padding-bottom: 64px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Features 区域背景光斑 */
+.VPFeatures::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: -100px;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(167, 139, 250, 0.05) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: -1;
+  transform: translateY(-50%);
+}
+
+/* 卡片基础 */
+.VPFeature {
+  border-radius: 16px !important;
+  border: 1px solid transparent !important;
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 卡片顶部色条 */
+.VPFeature::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  transition: opacity 0.35s ease;
+  z-index: 1;
+}
+
+/* ========================================
+   第 1 张卡片 — 极光紫 (助词)
+   ======================================== */
+.VPFeature:nth-child(1) {
+  background: linear-gradient(160deg, rgba(124, 58, 237, 0.06), rgba(167, 139, 250, 0.02)) !important;
+  border-color: rgba(167, 139, 250, 0.12) !important;
+}
+.VPFeature:nth-child(1)::before {
+  background: linear-gradient(90deg, #7c3aed, #a78bfa, #c084fc);
+}
+.VPFeature:nth-child(1):hover {
+  border-color: rgba(167, 139, 250, 0.35) !important;
+  box-shadow: 0 12px 32px rgba(124, 58, 237, 0.15), 0 0 60px rgba(167, 139, 250, 0.08);
+}
+.VPFeature:nth-child(1) .title { color: #7c3aed; }
+
+/* 第 1 张暗色 */
+html.dark .VPFeature:nth-child(1) {
+  background: linear-gradient(160deg, rgba(124, 58, 237, 0.12), rgba(167, 139, 250, 0.04)) !important;
+  border-color: rgba(167, 139, 250, 0.18) !important;
+}
+html.dark .VPFeature:nth-child(1):hover {
+  border-color: rgba(167, 139, 250, 0.45) !important;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35), 0 0 60px rgba(139, 92, 246, 0.14);
+}
+html.dark .VPFeature:nth-child(1) .title { color: #c4b5fd; }
+
+/* ========================================
+   第 2 张卡片 — 樱花粉 (形容词)
+   ======================================== */
+.VPFeature:nth-child(2) {
+  background: linear-gradient(160deg, rgba(236, 72, 153, 0.06), rgba(244, 114, 182, 0.02)) !important;
+  border-color: rgba(244, 114, 182, 0.12) !important;
+}
+.VPFeature:nth-child(2)::before {
+  background: linear-gradient(90deg, #ec4899, #f472b6, #f9a8d4);
+}
+.VPFeature:nth-child(2):hover {
+  border-color: rgba(244, 114, 182, 0.35) !important;
+  box-shadow: 0 12px 32px rgba(236, 72, 153, 0.15), 0 0 60px rgba(244, 114, 182, 0.08);
+}
+.VPFeature:nth-child(2) .title { color: #db2777; }
+
+/* 第 2 张暗色 */
+html.dark .VPFeature:nth-child(2) {
+  background: linear-gradient(160deg, rgba(236, 72, 153, 0.12), rgba(244, 114, 182, 0.04)) !important;
+  border-color: rgba(244, 114, 182, 0.18) !important;
+}
+html.dark .VPFeature:nth-child(2):hover {
+  border-color: rgba(244, 114, 182, 0.45) !important;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35), 0 0 60px rgba(236, 72, 153, 0.14);
+}
+html.dark .VPFeature:nth-child(2) .title { color: #f9a8d4; }
+
+/* ========================================
+   第 3 张卡片 — 天空蓝 (动词)
+   ======================================== */
+.VPFeature:nth-child(3) {
+  background: linear-gradient(160deg, rgba(14, 165, 233, 0.06), rgba(56, 189, 248, 0.02)) !important;
+  border-color: rgba(56, 189, 248, 0.12) !important;
+}
+.VPFeature:nth-child(3)::before {
+  background: linear-gradient(90deg, #0ea5e9, #38bdf8, #7dd3fc);
+}
+.VPFeature:nth-child(3):hover {
+  border-color: rgba(56, 189, 248, 0.35) !important;
+  box-shadow: 0 12px 32px rgba(14, 165, 233, 0.15), 0 0 60px rgba(56, 189, 248, 0.08);
+}
+.VPFeature:nth-child(3) .title { color: #0284c7; }
+
+/* 第 3 张暗色 */
+html.dark .VPFeature:nth-child(3) {
+  background: linear-gradient(160deg, rgba(14, 165, 233, 0.12), rgba(56, 189, 248, 0.04)) !important;
+  border-color: rgba(56, 189, 248, 0.18) !important;
+}
+html.dark .VPFeature:nth-child(3):hover {
+  border-color: rgba(56, 189, 248, 0.45) !important;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35), 0 0 60px rgba(14, 165, 233, 0.14);
+}
+html.dark .VPFeature:nth-child(3) .title { color: #7dd3fc; }
+
+/* ===========================
+   卡片 hover 通用效果
+   =========================== */
+.VPFeature:hover {
+  transform: translateY(-6px);
+}
+
+/* ===========================
+   卡片图标
+   =========================== */
+.VPFeature .icon {
+  font-size: 40px;
+  margin-bottom: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  transition: all 0.35s ease;
+}
+
+.VPFeature:hover .icon {
+  transform: scale(1.12) rotate(-5deg);
+}
+
+/* 每张卡片图标底色的浅色 */
+.VPFeature:nth-child(1) .icon {
+  background: rgba(167, 139, 250, 0.1);
+}
+.VPFeature:nth-child(2) .icon {
+  background: rgba(244, 114, 182, 0.1);
+}
+.VPFeature:nth-child(3) .icon {
+  background: rgba(56, 189, 248, 0.1);
+}
+
+/* 图标底色暗色 */
+html.dark .VPFeature:nth-child(1) .icon {
+  background: rgba(167, 139, 250, 0.15);
+}
+html.dark .VPFeature:nth-child(2) .icon {
+  background: rgba(244, 114, 182, 0.15);
+}
+html.dark .VPFeature:nth-child(3) .icon {
+  background: rgba(56, 189, 248, 0.15);
+}
+
+/* ===========================
+   卡片标题
+   =========================== */
+.VPFeature .title {
+  font-size: 17px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+/* 卡片描述 */
+.VPFeature .details {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--vp-c-text-2);
+}
+
+/* 卡片交错动画 */
+.VPFeature:nth-child(1) { animation: featureFadeIn 0.6s ease-out 0.1s both; }
+.VPFeature:nth-child(2) { animation: featureFadeIn 0.6s ease-out 0.25s both; }
+.VPFeature:nth-child(3) { animation: featureFadeIn 0.6s ease-out 0.4s both; }
+.VPFeature:nth-child(4) { animation: featureFadeIn 0.6s ease-out 0.55s both; }
+.VPFeature:nth-child(5) { animation: featureFadeIn 0.6s ease-out 0.7s both; }
+.VPFeature:nth-child(6) { animation: featureFadeIn 0.6s ease-out 0.85s both; }
+
+/* ===========================
+   导航栏优化
+   =========================== */
+.VPNavBar {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  background: rgba(250, 248, 252, 0.72) !important;
+  border-bottom: 1px solid rgba(167, 139, 250, 0.06);
+}
+
+html.dark .VPNavBar {
+  background: rgba(13, 13, 26, 0.72) !important;
+  border-bottom: 1px solid rgba(139, 92, 246, 0.1);
+}
+
+.VPNavBar .title {
+  font-weight: 700;
+}
+
+/* 侧边栏滚动条 */
+.VPSidebar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.VPSidebar::-webkit-scrollbar-thumb {
+  background: var(--vp-c-bg-soft);
+  border-radius: 2px;
+}
+
+/* ===========================
+   全局优化
+   =========================== */
+/* 平滑滚动 */
+html {
+  scroll-behavior: smooth;
+}
+
+/* 选择文字颜色 */
+::selection {
+  background: rgba(167, 139, 250, 0.3);
+  color: inherit;
+}
+
+html.dark ::selection {
+  background: rgba(139, 92, 246, 0.4);
+  color: inherit;
+}
+
+/* 链接 hover 效果 */
+a:not(.VPButton):not(.VPLink):not(.VPNavBarTitle):not(.VPSocialLink) {
+  transition: color 0.2s ease;
+}
+
+/* ===========================
+   动画关键帧
+   =========================== */
+@keyframes heroNameFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes heroTaglineFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes heroActionsFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes featureFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes heroBgFloat {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(20px, -15px) scale(1.05);
+  }
+  66% {
+    transform: translate(-10px, 10px) scale(0.95);
+  }
+}
