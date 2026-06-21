@@ -67,7 +67,7 @@ jobs:
       - name: Install dependencies
         run: |
           rm -f pnpm-lock.yaml
-          pnpm install
+          pnpm install --allow-build
 
         # 构建项目
       - name: Build blog project
