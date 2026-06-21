@@ -67,7 +67,6 @@ jobs:
       - name: Install dependencies
         run: |
           rm -f pnpm-lock.yaml
-          pnpm config set onlyBuiltDependencies esbuild
           pnpm install
 
         # 构建项目

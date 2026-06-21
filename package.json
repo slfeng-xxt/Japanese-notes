@@ -32,5 +32,8 @@
   "devDependencies": {
     "less": "^4.3.0",
     "vitepress-demo-plugin": "^1.4.5"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": ["esbuild", "core-js"]
   }
 }
