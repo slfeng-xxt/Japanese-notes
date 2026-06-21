@@ -35,10 +35,10 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    # node v22 运行
+    # node v18 运行
     strategy:
       matrix:
-        node-version: [22]
+        node-version: [18]
 
     steps:
       # 拉取代码
@@ -54,20 +54,16 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      # 使用 最新的 PNPM
-      # 你也可以指定为具体的版本
+      # 使用 PNPM v8（兼容 Node 18）
       - uses: pnpm/action-setup@v2
         name: Install pnpm
         with:
-          version: latest
-          # version: 9
+          version: 8
           run_install: false
 
         # 安装依赖
       - name: Install dependencies
-        run: |
-          rm -f pnpm-lock.yaml
-          pnpm install
+        run: pnpm install --no-frozen-lockfile
 
         # 构建项目
       - name: Build blog project
