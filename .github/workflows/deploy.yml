@@ -65,7 +65,9 @@ jobs:
 
         # 安装依赖
       - name: Install dependencies
-        run: pnpm install --no-frozen-lockfile
+        run: |
+          rm -f pnpm-lock.yaml
+          pnpm install
 
         # 构建项目
       - name: Build blog project
