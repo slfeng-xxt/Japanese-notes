@@ -6,7 +6,7 @@ export default defineConfig({
   title: "日语学习笔记", //站点标题
   description: "这是我学习日语的笔记", //mate标签description，多用于搜索引擎抓取摘要
   head: [
-    ["link", { rel: "icon", href: "/Japanese-notes/public/favicon.ico" }], // 添加图标
+    ["link", { rel: "icon", href: "/Japanese-notes/favicon.ico" }], // 添加图标
   ],
   themeConfig: {
     siteTitle: "Alex🍊",
@@ -19,6 +19,7 @@ export default defineConfig({
         text: "N5",
         collapsed: true,
         items: [
+          { text: "了解", link: "/N5/lesson0" },
           { text: "lesson1", link: "/N5/lesson1" },
           { text: "lesson2", link: "/N5/lesson2" },
           { text: "lesson3", link: "/N5/lesson3" },
